@@ -4,6 +4,8 @@ const { spawn } = require('child_process')
 const { promises: fs } = require('fs')
 const del = require('del')
 
+const argv = require('minimist')(process.argv.slice(2))
+
 const packageRelativePath = path.relative(__dirname, process.cwd())
 
 const pkg = require(`${packageRelativePath}/package.json`)
@@ -13,27 +15,31 @@ console.log('cwd ', process.cwd())
 console.log(`relative `, path.relative(__dirname, process.cwd()))
 console.log('PKG name ', pkg.name)
 console.log('babel env ', process.env.BABEL_ENV)
+
+console.dir(argv)
 // return
 ;(async () => {
   const deletedDirectoryPaths = await del(['dist/cjs'])
   console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'))
 })()
 
+process.env.BUILD_PACKAGE_NAME = pkg.name
+
 series([
   function (cb) {
     // build browser cjs development and production versions
-    process.env.NODE_ENV = 'development'
+    // process.env.NODE_ENV = 'development' // ?
     process.env.BUILD = 'cjsBrowserDev,cjsBrowserProd'
     spawn(
       'yarn',
       ['--cwd', process.cwd(), 'rollup', '-c', '../../rollup.config.js'],
       {
         stdio: 'inherit',
-        shell: true,
-        env: {
-          ...process.env,
-          BUILD_PACKAGE_NAME: pkg.name
-        }
+        shell: true
+        // env: {
+        //   ...process.env,
+        //   BUILD_PACKAGE_NAME: pkg.name
+        // }
       }
     ).on('exit', (code) => {
       cb(code)

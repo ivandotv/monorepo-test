@@ -59,7 +59,7 @@ const browser = {
   input,
   output: [
     {
-      file: libPath('./dist/cjs/', libraryName)('.production.min.js'),
+      file: libPath('./dist/cjs', libraryName)('.production.min.js'),
       format: 'cjs',
       name: libraryName,
       sourcemap: true,
