@@ -17,16 +17,8 @@
     "type:check": "tsc -p tsconfig.check-types.json",
     "type:watch": "yarn type:check --watch",
     "type:build": "del dist/types && tsc -p tsconfig.build-types.json",
-    "server:build:cjs": "del dist/cjs && cross-env BABEL_ENV=cjs NODE_ENV=production babel src --out-dir dist/cjs --extensions .ts,.tsx,.js,.jsx --source-maps",
-    "server:build:esm": "del dist/esm && cross-env BABEL_ENV=esm NODE_ENV=production babel src --out-dir dist/esm --extensions .ts,.tsx,.js,.jsx --source-maps",
-    "server:build": "yarn type:build && yarn server:build:cjs && yarn server:build:esm",
-    "server:watch": "del dist/cjs && cross-env BABEL_ENV=cjsWatch NODE_ENV=development babel src --out-dir dist/cjs --extensions .ts,.tsx,.js,.jsx --source-maps --watch",
-    "browser:build:unpkg": "del dist/unpkg && rollup -c ../../rollup.config.js  --environment BUILD:unpkg",
-    "browser:build:cjs": "node ../../scripts/browser-cjs.js --build=cjs",
-    "browser:build:un2": "node ../../scripts/browser-cjs.js --build=unpk",
-    "browser:build": "yarn type:build && yarn browser:build:cjs && yarn browser:build:unpkg",
     "browser:watch": "del dist/cjs && cross-env BABEL_ENV=browserWatch NODE_ENV=development babel src --out-dir dist/cjs --extensions .ts,.tsx,.js,.jsx --source-maps --watch",
-    "build": "yarn type:check && yarn test && node ../../scripts/build.js",
+    "build": "yarn type:check && yarn test && node ../../scripts/build-browser.js --bundle=umd",
     "prepublishOnly": "yarn build"
   }
 }

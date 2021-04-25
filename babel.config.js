@@ -208,7 +208,7 @@ module.exports = {
           {
             modules: false,
             targets: {
-              node: 12 // es2018
+              node: 14 // es2018
             }
           }
         ]

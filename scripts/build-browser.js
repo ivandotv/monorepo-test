@@ -7,50 +7,50 @@ const del = require('del')
 const argv = require('minimist')(process.argv.slice(2))
 
 const packageRelativePath = path.relative(__dirname, process.cwd())
-
 const pkg = require(`${packageRelativePath}/package.json`)
-
-console.log('dirname ', __dirname)
-console.log('cwd ', process.cwd())
-console.log(`relative `, path.relative(__dirname, process.cwd()))
-console.log('PKG name ', pkg.name)
-console.log('babel env ', process.env.BABEL_ENV)
-
-console.dir(argv)
-// return
-;(async () => {
-  const deletedDirectoryPaths = await del(['dist/cjs'])
-  console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'))
-})()
 
 process.env.BUILD_PACKAGE_NAME = pkg.name
 
-series([
+const allBuilds = ['cjs', 'esm', 'umd']
+
+const buildBundle = argv.bundle ? argv.bundle.split(',') : allBuilds
+
+process.env.BUILD_TARGET = buildBundle.join(',')
+
+console.log('build target ---->', process.env.BUILD_TARGET)
+
+console.log({ buildBundle })
+;(async () => {
+  for (const build of buildBundle) {
+    const deletedDirectoryPaths = await del([`dist/${build}`])
+
+    console.log('Deleted directories:\n', deletedDirectoryPaths.join('\n'))
+  }
+})()
+
+let tasks = [
   function (cb) {
-    // build browser cjs development and production versions
-    // process.env.NODE_ENV = 'development' // ?
-    process.env.BUILD = 'cjsBrowserDev,cjsBrowserProd'
     spawn(
       'yarn',
       ['--cwd', process.cwd(), 'rollup', '-c', '../../rollup.config.js'],
       {
         stdio: 'inherit',
         shell: true
-        // env: {
-        //   ...process.env,
-        //   BUILD_PACKAGE_NAME: pkg.name
-        // }
       }
     ).on('exit', (code) => {
       cb(code)
     })
-  },
-  async (cb) => {
-    return await createIndexFile(pkg.name)
   }
-])
+]
 
-async function createIndexFile(libName) {
+if (buildBundle.indexOf('cjs') !== -1) {
+  tasks = tasks.concat(async (cb) => {
+    return await createCjsIndexFile(pkg.name)
+  })
+}
+series(tasks)
+
+async function createCjsIndexFile(libName) {
   const file = await fs.readFile('../../scripts/cjs-browser-template.js', {
     encoding: 'utf-8'
   })
