@@ -4,3 +4,4 @@ export function test(obj: object) {
   //   ...obj
   // }
 }
+//
