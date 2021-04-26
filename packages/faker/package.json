@@ -18,7 +18,7 @@
     "type:watch": "yarn type:check --watch",
     "type:build": "del dist/types && tsc -p tsconfig.build-types.json",
     "browser:watch": "del dist/cjs && cross-env BABEL_ENV=browserWatch NODE_ENV=development babel src --out-dir dist/cjs --extensions .ts,.tsx,.js,.jsx --source-maps --watch",
-    "build": "yarn type:check && yarn test && node ../../scripts/build-browser.js --bundle=umd",
+    "build": "yarn type:build && yarn test && node ../../scripts/build-browser.js --bundle=umd",
     "prepublishOnly": "yarn build"
   }
 }

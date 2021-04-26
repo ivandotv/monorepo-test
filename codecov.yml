@@ -1,0 +1,7 @@
+flags:
+  # filter the folder(s) you wish to measure by that flag
+  first-app:
+    # only include files in the backend folder
+    carryforward: true
+    paths:
+      - packages/first/

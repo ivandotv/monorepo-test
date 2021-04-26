@@ -1,7 +1,7 @@
-export function test(obj: object) {
-  return true
-  // return {
-  //   ...obj
-  // }
+export function test(obj: any) {
+  // return true
+  return {
+    ...obj
+  }
 }
-//
+//////
