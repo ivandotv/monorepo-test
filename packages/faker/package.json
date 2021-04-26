@@ -20,5 +20,8 @@
     "browser:watch": "del dist/cjs && cross-env BABEL_ENV=browserWatch NODE_ENV=development babel src --out-dir dist/cjs --extensions .ts,.tsx,.js,.jsx --source-maps --watch",
     "build": "yarn type:build && yarn test && node ../../scripts/build-browser.js --bundle=umd",
     "prepublishOnly": "yarn build"
+  },
+  "dependencies": {
+    "react": "^17.0.2"
   }
 }
