@@ -9,4 +9,8 @@ export function one(obj: any) {
     ...obj
   }
 }
+
+export function two() {
+  return true
+}
 //////
