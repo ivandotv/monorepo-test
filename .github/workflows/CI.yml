@@ -1,4 +1,4 @@
-name: Unit tests
+name: Test
 on:
   push:
     branches:
@@ -38,6 +38,14 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Lint source
+        run: |
+          yarn lint:ci
+
+      - name: Check types
+        run: |
+          yarn type:check
+
       - name: Run tests
         run: |
           yarn test:ci
@@ -45,17 +53,6 @@ jobs:
           CI: true
 
       - name: Generate Code Coverage
+        # only when running in node v14
         if: matrix.node == 14
         uses: codecov/codecov-action@v1
-        # with:
-        # token: ${{ secrets.CODECOV_TOKEN }} # not required for public repos
-        # file: ./coverage/coverage-final.json
-
-      # - name: 'Publish to NPM'
-      #   if: github.event_name == 'push' && github.repository == 'ivandotv/untilted' && matrix.node == 14
-      #   run: |
-      #     node scripts/build.js
-      #     yarn semantic-release
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     NPM_TOKEN: ${{ secrets.NPM_TOKEN }}

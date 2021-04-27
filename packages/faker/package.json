@@ -13,7 +13,7 @@
     "docs": "del docs/api && typedoc --theme markdown --readme none --excludePrivate --excludeNotExported --out docs/api ./src",
     "test": "cross-env BABEL_ENV=test jest --verbose --coverage --no-cache",
     "test:watch": "cross-env BABEL_ENV=test jest --watch",
-    "test:ci": "yarn type:check && cross-env BABEL_ENV=test jest --runInBand --ci --reporters=default --reporters=jest-junit --coverage --coverageDirectory=coverage",
+    "test:ci": "cross-env BABEL_ENV=test jest --runInBand --ci --reporters=default --reporters=jest-junit --coverage --coverageDirectory=coverage",
     "type:check": "tsc -p tsconfig.check-types.json",
     "type:watch": "yarn type:check --watch",
     "type:build": "del dist/types && tsc -p tsconfig.build-types.json",

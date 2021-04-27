@@ -9,6 +9,10 @@
   ],
   "scripts": {
     "test:ci": "lerna run test:ci --stream",
+    "test": "lerna run test --stream",
+    "lint": "lerna run lint --stream",
+    "type:check": "lerna run type:check --stream",
+    "release": "yarn lerna run prepublish && yarn changeset publish",
     "build": "lerna run build --stream",
     "prepare": "husky install"
   },
