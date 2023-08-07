@@ -55,4 +55,4 @@ jobs:
       - name: Generate Code Coverage
         # only when running in node v14
         if: matrix.node == 14
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v3
