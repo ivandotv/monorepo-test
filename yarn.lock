@@ -2551,7 +2551,7 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
-"@types/node@*", "@types/node@^14.14.41":
+"@types/node@*":
   version "14.14.41"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-14.14.41.tgz#d0b939d94c1d7bd53d04824af45f1139b8c45615"
   integrity sha512-dueRKfaJL4RTtSa7bWeTK1M+VH+Gns73oCgzvYfHZywRCoPSd8EkXBL0mZ9unPTveBn+D9phZBaxuzpwjWkW0g==
@@ -2560,6 +2560,11 @@
   version "12.20.10"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-12.20.10.tgz#4dcb8a85a8f1211acafb88d72fafc7e3d2685583"
   integrity sha512-TxCmnSSppKBBOzYzPR2BR25YlX5Oay8z2XGwFBInuA/Co0V9xJhLlW4kjbxKtgeNo3NOMbQP1A5Rc03y+XecPw==
+
+"@types/node@^18.0.0":
+  version "18.17.12"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.17.12.tgz#c6bd7413a13e6ad9cfb7e97dd5c4e904c1821e50"
+  integrity sha512-d6xjC9fJ/nSnfDeU0AMDsaJyb1iHsqCSOdi84w4u+SlN/UgQdY5tRhpMzaFYsI4mnpvgTivEaQd0yOUhAtOnEQ==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
